@@ -49,6 +49,9 @@ A high-performance Layer 1 blockchain forked from [Solana](https://github.com/an
 | `dapp-scaffold/` | DApp starter template | Next.js |
 | `networks/` | Genesis configs for devnet, testnet, mainnet | JSON |
 | `docker/` | Docker images for validator, explorer, faucet | Docker |
+| `ops/` | Production ops — Terraform, Ansible, Prometheus, Grafana, systemd | IaC |
+| `docs/` | Tokenomics, API reference, validator guide, developer guide | Markdown |
+| `branding/` | Logo, brand guidelines, color palette | SVG/Markdown |
 
 ## Networks
 
@@ -198,6 +201,41 @@ solclone/
 | yarn | Backpack wallet | `npm i -g yarn` |
 | Flutter 3.x | Flutter wallet | [flutter.dev](https://flutter.dev) |
 | Docker | Containerized networks | [docker.com](https://docker.com) |
+
+## Production Deployment
+
+```bash
+# Provision AWS validator (Terraform)
+cd ops/terraform && terraform init && terraform apply
+
+# Configure the server (Ansible)
+cd ops/ansible && ansible-playbook -i inventory playbook.yml
+
+# Bootstrap a new network
+./ops/network/bootstrap-network.sh --cluster devnet
+
+# Add a validator to an existing network
+./ops/network/add-validator.sh --cluster devnet --entrypoint <ip>:8001
+
+# Start monitoring (Prometheus + Grafana)
+cd ops/monitoring && docker compose -f docker-compose.monitoring.yml up -d
+# Grafana: http://localhost:3000 (admin/admin)
+# Prometheus: http://localhost:9090
+```
+
+See `docs/validator-guide.md` for the full operator guide and `networks/mainnet/validator-requirements.md` for hardware specs.
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Whitepaper](./WHITEPAPER.md) | Technical architecture, consensus, tokenomics |
+| [Tokenomics](./docs/tokenomics.md) | SCLONE supply, distribution, inflation, staking |
+| [API Reference](./docs/api-reference.md) | Complete JSON-RPC API documentation |
+| [Validator Guide](./docs/validator-guide.md) | Operator setup, monitoring, troubleshooting |
+| [Developer Guide](./docs/developer-guide.md) | Building programs, deploying DApps, SDK usage |
+| [Brand Guidelines](./branding/brand-guidelines.md) | Colors, typography, logo, voice |
+| [Security Policy](./SECURITY.md) | Vulnerability reporting, responsible disclosure |
 
 ## Upstream Sources
 

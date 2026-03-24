@@ -467,18 +467,7 @@ The network maintains three persistent clusters:
 
 All core protocol code and SPL programs undergo independent audits by at least two established blockchain security firms before mainnet deployment. Audit reports are published publicly.
 
-### 13.2 Bug Bounty
-
-SolClone operates a tiered bug bounty program:
-
-| Severity | Reward |
-|----------|--------|
-| Critical (consensus break, fund theft) | Up to $500,000 |
-| High (DoS, state corruption) | Up to $100,000 |
-| Medium (data leak, performance degradation) | Up to $25,000 |
-| Low (UI bugs, minor issues) | Up to $5,000 |
-
-### 13.3 Network Security Measures
+### 13.2 Network Security Measures
 
 - **Stake-weighted QoS** -- Prevents spam by prioritizing transactions from staked entities during congestion.
 - **Compute budget limits** -- Bounds execution cost per transaction, preventing resource exhaustion attacks.
