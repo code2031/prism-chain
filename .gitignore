@@ -1,6 +1,60 @@
+# Dependencies
 node_modules/
-.next/
+.pnp/
+.pnp.js
+
+# Build outputs
 dist/
+.next/
+out/
 target/
-.env*.local
+build/
 *.tsbuildinfo
+
+# Rust
+validator/target/
+program-library/target/
+
+# Flutter
+flutter-wallet/.dart_tool/
+flutter-wallet/.flutter-plugins
+flutter-wallet/.flutter-plugins-dependencies
+flutter-wallet/build/
+flutter-wallet/.packages
+flutter-wallet/.pub-cache/
+flutter-wallet/android/.gradle/
+flutter-wallet/ios/Pods/
+flutter-wallet/ios/.symlinks/
+flutter-wallet/macos/Pods/
+*.g.dart
+
+# Environment
+.env
+.env.*
+.env*.local
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# SolClone runtime
+.testnet.log
+.testnet.pid
+.solclone/
+test-ledger/
+
+# Docker
+.docker/
+
+# Misc
+*.log
+coverage/
+.turbo/

@@ -1,76 +1,216 @@
-# Solana Clone
+# SolClone
 
-Complete fork of the Solana blockchain ecosystem.
+A high-performance Layer 1 blockchain forked from [Solana](https://github.com/anza-xyz/agave). Complete ecosystem including validator, CLI wallet, Flutter GUI wallet, block explorer, SDK, SPL programs, DApp framework, and multi-network infrastructure.
+
+> **[Read the Whitepaper](./WHITEPAPER.md)**
+
+---
+
+## Architecture
+
+```
+                          ┌─────────────────────────────────────────┐
+                          │              SolClone Network            │
+                          │                                         │
+   ┌──────────┐          │  ┌───────────┐    ┌─────────────────┐  │
+   │ CLI      │──RPC────▶│  │ Validator  │◀──▶│  Gossip Network │  │
+   │ Wallet   │          │  │  (PoH +    │    │  (P2P Protocol) │  │
+   └──────────┘          │  │  Tower BFT)│    └─────────────────┘  │
+                          │  └─────┬─────┘                         │
+   ┌──────────┐          │        │                                │
+   │ Flutter  │──RPC────▶│  ┌─────▼─────┐    ┌─────────────────┐  │
+   │ Wallet   │          │  │  Runtime   │───▶│  SPL Programs   │  │
+   └──────────┘          │  │ (Sealevel) │    │  (Token, Stake) │  │
+                          │  └─────┬─────┘    └─────────────────┘  │
+   ┌──────────┐          │        │                                │
+   │ Explorer │──RPC────▶│  ┌─────▼─────┐                         │
+   │ (Next.js)│          │  │ Accounts   │                         │
+   └──────────┘          │  │(Cloudbreak)│                         │
+                          │  └───────────┘                         │
+   ┌──────────┐          │                                         │
+   │  DApps   │──RPC────▶│       ┌──────────┐                     │
+   │(web3.js) │          │       │  Faucet   │ (devnet/testnet)   │
+   └──────────┘          │       └──────────┘                     │
+                          └─────────────────────────────────────────┘
+```
 
 ## Components
 
-| Directory | Source | Description |
-|-----------|--------|-------------|
-| `validator/` | [anza-xyz/agave](https://github.com/anza-xyz/agave) | Solana validator - blockchain core, CLI, runtime, Proof of History, gossip, RPC (Rust) |
-| `web3js-sdk/` | [solana-labs/solana-web3.js](https://github.com/solana-labs/solana-web3.js) | JavaScript/TypeScript SDK for building DApps |
-| `program-library/` | [solana-labs/solana-program-library](https://github.com/solana-labs/solana-program-library) | SPL programs - Token, Token-2022, Governance, Stake Pool, Memo (Rust) |
-| `explorer/` | [solana-foundation/explorer](https://github.com/solana-foundation/explorer) | Block explorer web app (Next.js) |
-| `wallet-adapter/` | [anza-xyz/wallet-adapter](https://github.com/anza-xyz/wallet-adapter) | Wallet adapter - React hooks/UI for connecting wallets to DApps |
-| `wallet-gui/` | [coral-xyz/backpack](https://github.com/coral-xyz/backpack) | Backpack - open-source GUI wallet (React Native + web) |
-| `dapp-scaffold/` | [solana-labs/dapp-scaffold](https://github.com/solana-labs/dapp-scaffold) | DApp starter template (Next.js) |
+| Directory | Description | Language |
+|-----------|-------------|----------|
+| `validator/` | Blockchain core — validator, CLI, runtime, PoH, gossip, RPC | Rust |
+| `cli-wallet/` | Custom CLI wallet with full token + staking support | TypeScript |
+| `flutter-wallet/` | Cross-platform GUI wallet (Android, iOS, Web, Desktop) | Dart/Flutter |
+| `explorer/` | Block explorer web app | Next.js |
+| `web3js-sdk/` | JavaScript/TypeScript SDK for DApp developers | TypeScript |
+| `program-library/` | SPL programs — Token, Token-2022, Governance, Stake Pool, Memo | Rust |
+| `wallet-adapter/` | React hooks/UI for connecting wallets to DApps | TypeScript |
+| `wallet-gui/` | Backpack wallet (alternative GUI wallet) | React Native |
+| `dapp-scaffold/` | DApp starter template | Next.js |
+| `networks/` | Genesis configs for devnet, testnet, mainnet | JSON |
+| `docker/` | Docker images for validator, explorer, faucet | Docker |
 
-## Getting Started
+## Networks
 
-### Prerequisites
+SolClone runs three networks, matching Solana's architecture:
 
-- **Rust** (for validator and SPL programs): `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
-- **Node.js 18+** (for SDK, explorer, wallet, DApps)
-- **Solana CLI** (built from `validator/`): `cd validator && cargo build --release`
+| Network | RPC Port | Faucet | Use Case |
+|---------|----------|--------|----------|
+| **Devnet** | `8899` | 5 SOL/request | DApp development, testing |
+| **Testnet** | `8799` | 1 SOL/request | Validator testing, staging |
+| **Mainnet** | `8699` | None | Production |
+| **Localnet** | `8899` | Unlimited | Local single-node development |
 
-### Build the Validator
+## Quick Start
 
-```bash
-cd validator
-cargo build --release
-```
-
-### Run a Local Testnet
-
-```bash
-./validator/target/release/solana-test-validator
-```
-
-### Build the Explorer
+### Option 1: One-command setup
 
 ```bash
-cd explorer
-pnpm install
-pnpm dev
+./scripts/setup.sh --all
 ```
 
-### Build the Wallet
+### Option 2: Step by step
 
 ```bash
-cd wallet-gui
-yarn install
-yarn dev
+# Check dependencies
+make check-deps
+
+# Build the validator + CLI (takes 10-30 min)
+make validator
+
+# Start local testnet
+make testnet-bg
+
+# Airdrop yourself some SOL
+./scripts/airdrop.sh 100
+
+# Start the explorer
+make explorer
 ```
 
-### Build a DApp
+### Option 3: Docker (fastest)
 
 ```bash
-cd dapp-scaffold
-npm install
-npm run dev
+# Start devnet (validator + explorer + faucet)
+docker compose --profile devnet up
+
+# Or start all networks
+docker compose --profile full up
 ```
 
-## Individual Forks
+### Option 4: CLI Wallet
 
-Each component is also forked separately:
+```bash
+cd cli-wallet && npm install && npm run build
 
-- https://github.com/code2031/agave
-- https://github.com/code2031/solana-web3.js
-- https://github.com/code2031/solana-program-library
-- https://github.com/code2031/explorer
-- https://github.com/code2031/wallet-adapter
-- https://github.com/code2031/backpack
-- https://github.com/code2031/dapp-scaffold
+# Generate a keypair
+npx solclone keygen
+
+# Check balance
+npx solclone balance
+
+# Request airdrop (devnet)
+npx solclone airdrop 5
+
+# Send tokens
+npx solclone transfer <address> 1.5
+```
+
+### Option 5: Flutter Wallet
+
+```bash
+cd flutter-wallet
+
+# Run on web
+flutter run -d chrome
+
+# Run on Android
+flutter run
+
+# Run on desktop
+flutter run -d linux
+```
+
+## Make Commands
+
+```
+make help            # Show all commands
+make check-deps      # Verify prerequisites
+make setup           # Install all JS dependencies
+make validator       # Build validator (release)
+make cli             # Build CLI tools only
+make testnet         # Start local testnet (foreground)
+make testnet-bg      # Start local testnet (background)
+make stop-testnet    # Stop background testnet
+make explorer        # Start block explorer
+make wallet          # Start Backpack wallet
+make dapp            # Start DApp scaffold
+make sdk             # Build web3.js SDK
+make programs        # Build all SPL programs
+make status          # Show build/run status
+make clean           # Clean all artifacts
+make all             # Build everything
+```
+
+## Project Structure
+
+```
+solclone/
+├── validator/            # Solana validator (Rust) — forked from anza-xyz/agave
+│   ├── cli/              #   Solana CLI tool
+│   ├── core/             #   Consensus, PoH, Tower BFT
+│   ├── runtime/          #   Transaction processing (Sealevel)
+│   ├── rpc/              #   JSON-RPC server
+│   ├── gossip/           #   P2P gossip protocol
+│   └── ledger/           #   Ledger storage
+├── cli-wallet/           # Custom TypeScript CLI wallet
+│   └── src/commands/     #   keygen, balance, transfer, stake, token...
+├── flutter-wallet/       # Cross-platform Flutter GUI wallet
+│   └── lib/              #   screens, services, providers, widgets
+├── explorer/             # Block explorer (Next.js)
+├── web3js-sdk/           # JavaScript/TypeScript SDK
+├── program-library/      # SPL programs (Rust)
+│   ├── token/            #   SPL Token program
+│   ├── governance/       #   On-chain governance
+│   └── stake-pool/       #   Stake pool program
+├── wallet-adapter/       # React wallet adapter
+├── wallet-gui/           # Backpack wallet (React Native)
+├── dapp-scaffold/        # DApp starter (Next.js)
+├── networks/             # Network configurations
+│   ├── devnet/           #   Devnet genesis config
+│   ├── testnet/          #   Testnet genesis config
+│   └── mainnet/          #   Mainnet genesis config
+├── docker/               # Docker images
+├── scripts/              # Setup, airdrop, deploy scripts
+├── .github/workflows/    # CI/CD pipeline
+├── docker-compose.yml    # Multi-network Docker setup
+├── Makefile              # Unified build system
+└── WHITEPAPER.md         # Technical whitepaper
+```
+
+## Prerequisites
+
+| Tool | Required For | Install |
+|------|-------------|---------|
+| Rust 1.75+ | Validator, SPL programs | `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` |
+| Node.js 18+ | Explorer, SDK, DApps, CLI wallet | [nodejs.org](https://nodejs.org) |
+| pnpm | Explorer, wallet-adapter | `npm i -g pnpm` |
+| yarn | Backpack wallet | `npm i -g yarn` |
+| Flutter 3.x | Flutter wallet | [flutter.dev](https://flutter.dev) |
+| Docker | Containerized networks | [docker.com](https://docker.com) |
+
+## Upstream Sources
+
+| Component | Forked From |
+|-----------|-------------|
+| Validator | [anza-xyz/agave](https://github.com/anza-xyz/agave) |
+| Web3.js SDK | [solana-labs/solana-web3.js](https://github.com/solana-labs/solana-web3.js) |
+| SPL Programs | [solana-labs/solana-program-library](https://github.com/solana-labs/solana-program-library) |
+| Explorer | [solana-foundation/explorer](https://github.com/solana-foundation/explorer) |
+| Wallet Adapter | [anza-xyz/wallet-adapter](https://github.com/anza-xyz/wallet-adapter) |
+| Backpack Wallet | [coral-xyz/backpack](https://github.com/coral-xyz/backpack) |
+| DApp Scaffold | [solana-labs/dapp-scaffold](https://github.com/solana-labs/dapp-scaffold) |
 
 ## License
 
-Each component retains its original license. See individual directories for details.
+Each component retains its original license. See individual directories for details. Custom components (cli-wallet, flutter-wallet, networks, scripts) are MIT licensed.

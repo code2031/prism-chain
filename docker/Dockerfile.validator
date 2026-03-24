@@ -1,0 +1,25 @@
+FROM rust:1.80-bookworm AS builder
+
+WORKDIR /build
+COPY validator/ .
+
+RUN apt-get update && apt-get install -y \
+    libssl-dev pkg-config libudev-dev protobuf-compiler \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN cargo build --release --bin solana-validator --bin solana-test-validator --bin solana
+
+FROM debian:bookworm-slim
+
+RUN apt-get update && apt-get install -y \
+    ca-certificates libssl3 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /build/target/release/solana-validator /usr/local/bin/
+COPY --from=builder /build/target/release/solana-test-validator /usr/local/bin/
+COPY --from=builder /build/target/release/solana /usr/local/bin/
+
+EXPOSE 8899 8900 8001 8002
+
+ENTRYPOINT ["solana-test-validator"]
+CMD ["--rpc-port", "8899", "--bind-address", "0.0.0.0"]

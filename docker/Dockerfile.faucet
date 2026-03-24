@@ -1,0 +1,11 @@
+FROM node:20-slim
+
+WORKDIR /app
+
+RUN npm init -y && npm install express tweetnacl bs58
+
+COPY docker/faucet-server.js .
+
+EXPOSE 9900
+
+CMD ["node", "faucet-server.js"]

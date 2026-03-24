@@ -1,0 +1,150 @@
+# ============================================================================
+# SolClone Network — Docker Compose
+# Usage:
+#   docker compose --profile devnet up     # Start devnet
+#   docker compose --profile testnet up    # Start testnet
+#   docker compose --profile full up       # Start everything
+# ============================================================================
+
+services:
+  # ── Devnet ────────────────────────────────────────────────────────────────
+
+  devnet-validator:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.validator
+    profiles: ["devnet", "full"]
+    container_name: solclone-devnet-validator
+    ports:
+      - "8899:8899"   # RPC
+      - "8900:8900"   # WebSocket
+    volumes:
+      - devnet-ledger:/root/.local/share/solana
+    command: ["--rpc-port", "8899", "--bind-address", "0.0.0.0", "--log"]
+    healthcheck:
+      test: ["CMD", "solana", "cluster-version", "--url", "http://localhost:8899"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  devnet-faucet:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.faucet
+    profiles: ["devnet", "full"]
+    container_name: solclone-devnet-faucet
+    ports:
+      - "9900:9900"
+    environment:
+      - CLUSTER=devnet
+      - RPC_URL=http://devnet-validator:8899
+      - PORT=9900
+    depends_on:
+      devnet-validator:
+        condition: service_healthy
+
+  devnet-explorer:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.explorer
+    profiles: ["devnet", "full"]
+    container_name: solclone-devnet-explorer
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_CLUSTER=devnet
+      - NEXT_PUBLIC_CLUSTER_ENDPOINT=http://devnet-validator:8899
+    depends_on:
+      devnet-validator:
+        condition: service_healthy
+
+  # ── Testnet ───────────────────────────────────────────────────────────────
+
+  testnet-validator:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.validator
+    profiles: ["testnet", "full"]
+    container_name: solclone-testnet-validator
+    ports:
+      - "8799:8899"
+      - "8800:8900"
+    volumes:
+      - testnet-ledger:/root/.local/share/solana
+    command: ["--rpc-port", "8899", "--bind-address", "0.0.0.0", "--log"]
+    healthcheck:
+      test: ["CMD", "solana", "cluster-version", "--url", "http://localhost:8899"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  testnet-faucet:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.faucet
+    profiles: ["testnet", "full"]
+    container_name: solclone-testnet-faucet
+    ports:
+      - "9800:9900"
+    environment:
+      - CLUSTER=testnet
+      - RPC_URL=http://testnet-validator:8899
+      - PORT=9900
+    depends_on:
+      testnet-validator:
+        condition: service_healthy
+
+  testnet-explorer:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.explorer
+    profiles: ["testnet", "full"]
+    container_name: solclone-testnet-explorer
+    ports:
+      - "3100:3000"
+    environment:
+      - NEXT_PUBLIC_CLUSTER=testnet
+      - NEXT_PUBLIC_CLUSTER_ENDPOINT=http://testnet-validator:8899
+    depends_on:
+      testnet-validator:
+        condition: service_healthy
+
+  # ── Mainnet (single validator for local testing of mainnet config) ────────
+
+  mainnet-validator:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.validator
+    profiles: ["mainnet", "full"]
+    container_name: solclone-mainnet-validator
+    ports:
+      - "8699:8899"
+      - "8700:8900"
+    volumes:
+      - mainnet-ledger:/root/.local/share/solana
+    command: ["--rpc-port", "8899", "--bind-address", "0.0.0.0", "--log"]
+    healthcheck:
+      test: ["CMD", "solana", "cluster-version", "--url", "http://localhost:8899"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mainnet-explorer:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.explorer
+    profiles: ["mainnet", "full"]
+    container_name: solclone-mainnet-explorer
+    ports:
+      - "3200:3000"
+    environment:
+      - NEXT_PUBLIC_CLUSTER=mainnet-beta
+      - NEXT_PUBLIC_CLUSTER_ENDPOINT=http://mainnet-validator:8899
+    depends_on:
+      mainnet-validator:
+        condition: service_healthy
+
+volumes:
+  devnet-ledger:
+  testnet-ledger:
+  mainnet-ledger:

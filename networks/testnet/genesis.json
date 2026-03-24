@@ -1,0 +1,76 @@
+{
+  "cluster_type": "testnet",
+  "genesis_time": "2024-01-01T00:00:00Z",
+  "native_token": {
+    "name": "SolClone",
+    "symbol": "SCLONE",
+    "decimals": 9,
+    "initial_supply": 500000000,
+    "max_supply": null
+  },
+  "slots_per_epoch": 432000,
+  "target_tick_duration_ms": 6,
+  "ticks_per_slot": 64,
+  "target_slot_duration_ms": 400,
+  "hashes_per_tick": 12500,
+  "lamports_per_sol": 1000000000,
+  "fee_config": {
+    "lamports_per_signature": 5000,
+    "target_lamports_per_signature": 10000,
+    "fee_burn_percentage": 50
+  },
+  "rent_config": {
+    "lamports_per_byte_year": 3480,
+    "exemption_threshold_years": 2,
+    "burn_percentage": 50
+  },
+  "inflation": {
+    "initial_rate": 0.08,
+    "terminal_rate": 0.015,
+    "taper_rate": 0.15,
+    "foundation_percentage": 0.05,
+    "foundation_term_years": 7
+  },
+  "staking": {
+    "warmup_cooldown_rate": 0.25,
+    "min_delegation_lamports": 1000000000
+  },
+  "validator_config": {
+    "min_stake_for_leader": 5000000000000,
+    "leader_schedule_slot_offset": 432000,
+    "max_leader_schedule_epoch_offset": 5
+  },
+  "faucet": {
+    "enabled": true,
+    "max_request_amount_sol": 1,
+    "rate_limit_per_ip_per_hour": 3
+  },
+  "genesis_accounts": {
+    "faucet": {
+      "balance_sol": 50000000,
+      "purpose": "Testnet faucet (limited)"
+    },
+    "foundation": {
+      "balance_sol": 50000000,
+      "purpose": "Foundation treasury"
+    },
+    "ecosystem_fund": {
+      "balance_sol": 100000000,
+      "purpose": "Ecosystem development grants"
+    },
+    "initial_validators": {
+      "balance_sol": 300000000,
+      "purpose": "Distributed across initial validator set"
+    }
+  },
+  "builtin_programs": [
+    { "name": "system_program", "id": "11111111111111111111111111111111" },
+    { "name": "config_program", "id": "Config1111111111111111111111111111111111111" },
+    { "name": "stake_program", "id": "Stake11111111111111111111111111111111111111" },
+    { "name": "vote_program", "id": "Vote111111111111111111111111111111111111111" },
+    { "name": "bpf_loader", "id": "BPFLoaderUpgradeab1e11111111111111111111111" },
+    { "name": "spl_token", "id": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
+    { "name": "associated_token", "id": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL" },
+    { "name": "spl_memo", "id": "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr" }
+  ]
+}
