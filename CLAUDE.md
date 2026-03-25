@@ -71,6 +71,74 @@ docker compose --profile testnet up
 docker compose --profile full up      # All three networks simultaneously
 ```
 
+### Wallet Packages
+
+```bash
+# wallet-standard — Wallet Standard cross-wallet compatibility
+cd wallet-standard
+npm install && npm run build     # Compile to dist/ (tsc)
+npm test
+
+# wallet-connect — WalletConnect v2 mobile QR pairing
+cd wallet-connect
+npm install && npm run build     # Compile to dist/ (tsc)
+npm test
+
+# connect-kit — React wallet connection components for DApps
+cd connect-kit
+npm install && npm run build     # Compile + bundle to dist/
+npm run dev                      # Storybook for component development
+npm test
+```
+
+### DeFi Suite (`defi/`)
+
+Contains four sub-projects, each with a Rust on-chain program and some with a TypeScript UI:
+
+```bash
+# SolSwap DEX
+cd defi/solswap/program && cargo build-sbf    # Build on-chain program
+cd defi/solswap/ui && npm install && npm run dev  # AMM trading UI
+
+# SolLend lending protocol
+cd defi/sollend/program && cargo build-sbf
+cd defi/sollend/ui && npm install && npm run dev
+
+# SCUSD stablecoin
+cd defi/scusd/program && cargo build-sbf
+
+# Oracle price feeds
+cd defi/oracle/program && cargo build-sbf
+```
+
+### NFT Marketplace (`nft-marketplace/`)
+
+SolMart NFT marketplace with auctions and collections:
+
+```bash
+cd nft-marketplace/program && cargo build-sbf    # On-chain program
+cd nft-marketplace/ui && npm install && npm run dev  # Marketplace UI
+```
+
+### Governance (`governance/`)
+
+DAO governance with proposals, voting, and treasury:
+
+```bash
+cd governance/program && cargo build-sbf         # On-chain program
+cd governance/ui && npm install && npm run dev    # Governance UI
+```
+
+### Faucet & Health Dashboard
+
+```bash
+# Faucet — devnet/testnet token faucet web UI
+cd faucet && npm install && npm run dev          # Dev server
+
+# Health Dashboard — real-time network stats
+cd health-dashboard && npm install && npm run dev  # Dev server
+```
+
 ## Testing
 
 ```bash
@@ -79,6 +147,18 @@ cd validator && cargo test --release --lib
 
 # SPL programs
 cd program-library && cargo test --release
+
+# DeFi programs
+cd defi/solswap/program && cargo test
+cd defi/sollend/program && cargo test
+cd defi/scusd/program && cargo test
+cd defi/oracle/program && cargo test
+
+# NFT marketplace program
+cd nft-marketplace/program && cargo test
+
+# Governance program
+cd governance/program && cargo test
 
 # Explorer
 cd explorer && pnpm test              # vitest unit tests
@@ -109,6 +189,22 @@ All clients communicate with the validator via **Solana-compatible JSON-RPC** (d
 - **`web3js-sdk/`** — TypeScript SDK using rollup. Forked from `solana-labs/solana-web3.js`.
 
 - **`wallet-adapter/`** — React hooks/UI for DApp wallet integration (pnpm). `wallet-gui/` is Backpack wallet (yarn + turborepo).
+
+- **`wallet-standard/`** — Wallet Standard implementation. Core files: `src/wallet.ts` (SolCloneWallet class), `src/adapter.ts` (legacy bridge), `src/register.ts` (registration), `src/detect.ts` (wallet detection). TypeScript, tsc build.
+
+- **`wallet-connect/`** — WalletConnect v2 integration. Core files: `src/client.ts` (SignClient wrapper), `src/qr-modal.ts` (QR generation), `src/chains.ts` (SolClone chain IDs). TypeScript, tsc build.
+
+- **`connect-kit/`** — React component library for DApp wallet connection. Core files: `src/provider.tsx` (SolCloneProvider), `src/components/ConnectButton.tsx`, `src/components/WalletModal.tsx`, `src/hooks/useWallet.ts`, `src/hooks/useSolClone.ts`. Composes wallet-standard + wallet-connect.
+
+- **`defi/`** — DeFi suite with four sub-projects: `solswap/` (AMM DEX with program/ and ui/), `sollend/` (lending protocol with program/ and ui/), `scusd/` (algorithmic stablecoin, program/ only), `oracle/` (price feeds, program/ only). Rust programs build with `cargo build-sbf`, UIs are Next.js/React.
+
+- **`nft-marketplace/`** — SolMart NFT marketplace. `program/` is the Rust on-chain program (listings, auctions, collections). `ui/` is the React marketplace frontend.
+
+- **`governance/`** — DAO governance system. `program/` handles proposals, voting, and treasury management. `ui/` is the governance dashboard frontend.
+
+- **`faucet/`** — Web UI for requesting devnet/testnet tokens. TypeScript, npm dev server.
+
+- **`health-dashboard/`** — Real-time network stats dashboard showing TPS, slot height, validator count, epoch info. TypeScript, npm dev server.
 
 ### Networks
 

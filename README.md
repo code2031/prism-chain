@@ -45,16 +45,52 @@ A high-performance Layer 1 blockchain forked from [Solana](https://github.com/an
 | `web3js-sdk/` | JavaScript/TypeScript SDK for DApp developers | TypeScript |
 | `program-library/` | SPL programs — Token, Token-2022, Governance, Stake Pool, Memo | Rust |
 | `wallet-adapter/` | React hooks/UI for connecting wallets to DApps | TypeScript |
+| `wallet-standard/` | Wallet Standard for cross-wallet compatibility | TypeScript |
+| `wallet-connect/` | WalletConnect v2 mobile QR pairing | TypeScript |
+| `connect-kit/` | React wallet connection components for DApps | TypeScript/React |
 | `wallet-gui/` | Backpack wallet (alternative GUI wallet) | React Native |
 | `dapp-scaffold/` | DApp starter template | Next.js |
+| `defi/` | DeFi suite: SolSwap DEX, SolLend, SCUSD stablecoin, Oracle | Rust/TypeScript |
+| `nft-marketplace/` | SolMart NFT marketplace with auctions and collections | Rust/TypeScript |
+| `governance/` | DAO governance with proposals, voting, treasury | Rust/TypeScript |
+| `faucet/` | Devnet/testnet faucet web UI | TypeScript |
+| `health-dashboard/` | Real-time network stats dashboard | TypeScript |
 | `networks/` | Genesis configs for devnet, testnet, mainnet | JSON |
+| `metaplex/` | Metaplex Token Metadata — NFT standard | Rust |
+| `anchor/` | Anchor framework — easiest way to build programs | Rust |
 | `docker/` | Docker images for validator, explorer, faucet | Docker |
 | `ops/` | Production ops — Terraform, Ansible, Prometheus, Grafana, systemd | IaC |
 | `docs/` | Tokenomics, API reference, validator guide, developer guide | Markdown |
 | `branding/` | Logo, brand guidelines, color palette | SVG/Markdown |
-| `metaplex/` | Metaplex Token Metadata — NFT standard | Rust |
-| `anchor/` | Anchor framework — easiest way to build programs | Rust |
 | `examples/` | Example scripts: create token, create NFT, deploy program, run DApp | Bash |
+
+## Third-Party Wallet Support
+
+SolClone implements the [Wallet Standard](https://github.com/wallet-standard/wallet-standard), which means **any compliant wallet works out of the box** with SolClone DApps -- no custom integration required.
+
+| Wallet | Connection Method |
+|--------|-------------------|
+| **Phantom** | Browser extension (Wallet Standard) |
+| **Solflare** | Browser extension (Wallet Standard) |
+| **Backpack** | Browser extension (Wallet Standard) |
+| **Any Wallet Standard wallet** | Auto-detected via `@solclone/wallet-standard` |
+| **Any mobile wallet** | QR code pairing via `@solclone/wallet-connect` |
+
+DApp developers can add full wallet support in three lines of code using `@solclone/connect-kit`:
+
+```tsx
+import { SolCloneProvider, ConnectButton } from "@solclone/connect-kit";
+
+function App() {
+  return (
+    <SolCloneProvider network="devnet">
+      <ConnectButton />
+    </SolCloneProvider>
+  );
+}
+```
+
+See [`wallet-standard/`](./wallet-standard/), [`wallet-connect/`](./wallet-connect/), and [`connect-kit/`](./connect-kit/) for details.
 
 ## What You Can Do
 
@@ -196,8 +232,16 @@ solclone/
 │   ├── governance/       #   On-chain governance
 │   └── stake-pool/       #   Stake pool program
 ├── wallet-adapter/       # React wallet adapter
+├── wallet-standard/      # Wallet Standard cross-wallet compatibility
+├── wallet-connect/       # WalletConnect v2 mobile QR pairing
+├── connect-kit/          # React wallet connection components
 ├── wallet-gui/           # Backpack wallet (React Native)
 ├── dapp-scaffold/        # DApp starter (Next.js)
+├── defi/                 # DeFi suite (SolSwap, SolLend, SCUSD, Oracle)
+├── nft-marketplace/      # SolMart NFT marketplace
+├── governance/           # DAO governance (proposals, voting, treasury)
+├── faucet/               # Devnet/testnet faucet web UI
+├── health-dashboard/     # Real-time network stats dashboard
 ├── networks/             # Network configurations
 │   ├── devnet/           #   Devnet genesis config
 │   ├── testnet/          #   Testnet genesis config

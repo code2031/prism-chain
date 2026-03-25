@@ -1,0 +1,35 @@
+{
+  "name": "@solclone/connect-kit",
+  "version": "1.0.0",
+  "description": "React component library for adding wallet connections to SolClone DApps",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solclone/wallet-standard": "^1.0.0",
+    "@solclone/wallet-connect": "^1.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/react": "^18.2.0"
+  },
+  "keywords": [
+    "solclone",
+    "solana",
+    "wallet",
+    "react",
+    "connect",
+    "dapp"
+  ],
+  "license": "MIT"
+}
