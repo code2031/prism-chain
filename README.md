@@ -62,6 +62,14 @@ A high-performance Layer 1 blockchain forked from [Solana](https://github.com/an
 | `ops/` | Production ops — Terraform, Ansible, Prometheus, Grafana, systemd | IaC |
 | `docs/` | Tokenomics, API reference, validator guide, developer guide | Markdown |
 | `branding/` | Logo, brand guidelines, color palette | SVG/Markdown |
+| `ai/` | AI features: portfolio advisor, contract auditor, NL explorer, NFT generator | Next.js |
+| `bridges/` | Cross-chain bridges: Ethereum, Bitcoin, Solana + unified UI | Rust/TypeScript |
+| `ecosystem/` | Ecosystem tools: launchpad, validator marketplace, profiles, grants, bounties | Rust/TypeScript |
+| `playground/` | Browser-based Solana program IDE and simulator | Next.js |
+| `templates/` | Anchor program templates: token, NFT, escrow, voting, staking | Rust |
+| `benchmarks/` | TPS and latency benchmark suite | TypeScript |
+| `docs-site/` | Docusaurus documentation site | TypeScript |
+| `privacy/` | Confidential transfers with shielded pools and ZK proofs | Rust |
 | `examples/` | Example scripts: create token, create NFT, deploy program, run DApp | Bash |
 
 ## Third-Party Wallet Support
