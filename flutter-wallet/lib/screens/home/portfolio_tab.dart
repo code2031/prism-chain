@@ -11,6 +11,7 @@ import '../send/send_screen.dart';
 import '../receive/receive_screen.dart';
 import '../token/token_detail_screen.dart';
 import '../staking/staking_screen.dart';
+import '../create_token/manage_tokens_screen.dart';
 
 class PortfolioTab extends StatelessWidget {
   const PortfolioTab({super.key});
@@ -19,7 +20,9 @@ class PortfolioTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer2<WalletProvider, NetworkProvider>(
       builder: (context, walletProvider, networkProvider, _) {
-        return SafeArea(
+        return Stack(
+          children: [
+          SafeArea(
           child: RefreshIndicator(
             onRefresh: () => walletProvider.refreshAll(),
             color: AppTheme.solanaPurple,
@@ -141,6 +144,19 @@ class PortfolioTab extends StatelessWidget {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (_) => const StakingScreen(),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        _QuickAction(
+                          icon: Icons.add_circle_outline_rounded,
+                          label: 'Create',
+                          color: AppTheme.solanaGreen,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const ManageTokensScreen(),
                               ),
                             );
                           },

@@ -65,6 +65,8 @@ class SolCloneWallet extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider<RpcService>.value(value: rpcService),
+        Provider<WalletService>.value(value: walletService),
         Provider<PriceService>.value(value: priceService),
         ChangeNotifierProvider<NetworkProvider>(
           create: (_) => NetworkProvider(rpcService),
