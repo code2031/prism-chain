@@ -48,6 +48,42 @@ class PolygonToken {
       contractAddress: '0xD6DF932A45C0f255f85145f286eA0b292B21C90B',
       decimals: 18,
     ),
+    PolygonToken(
+      name: 'Chainlink',
+      symbol: 'LINK',
+      contractAddress: '0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39',
+      decimals: 18,
+    ),
+    PolygonToken(
+      name: 'QuickSwap',
+      symbol: 'QUICK',
+      contractAddress: '0xB5C064F955D8e7F38fE0460C556a72987494eE17',
+      decimals: 18,
+    ),
+    PolygonToken(
+      name: 'Curve DAO',
+      symbol: 'CRV',
+      contractAddress: '0x172370d5Cd63279eFa6d502DAB29171933a610AF',
+      decimals: 18,
+    ),
+    PolygonToken(
+      name: 'SushiSwap',
+      symbol: 'SUSHI',
+      contractAddress: '0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a',
+      decimals: 18,
+    ),
+    PolygonToken(
+      name: 'Balancer',
+      symbol: 'BAL',
+      contractAddress: '0x9a71012B13CA4d3D0Cdc72A177dF3ef03b0E76A3',
+      decimals: 18,
+    ),
+    PolygonToken(
+      name: 'Wrapped Bitcoin',
+      symbol: 'WBTC',
+      contractAddress: '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6',
+      decimals: 8,
+    ),
   ];
 }
 

@@ -40,7 +40,7 @@ A high-performance Layer 1 blockchain forked from [Solana](https://github.com/an
 |-----------|-------------|----------|
 | `validator/` | Blockchain core — validator, CLI, runtime, PoH, gossip, RPC | Rust |
 | `cli-wallet/` | Custom CLI wallet with full token + staking support | TypeScript |
-| `flutter-wallet/` | Cross-platform GUI wallet (Android, iOS, Web, Desktop) | Dart/Flutter |
+| `flutter-wallet/` | Cross-platform GUI wallet — 32 chains, 60+ tokens (Android, iOS, Web, Desktop) | Dart/Flutter |
 | `explorer/` | Block explorer web app | Next.js |
 | `web3js-sdk/` | JavaScript/TypeScript SDK for DApp developers | TypeScript |
 | `program-library/` | SPL programs — Token, Token-2022, Governance, Stake Pool, Memo | Rust |

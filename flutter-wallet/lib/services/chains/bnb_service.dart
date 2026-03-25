@@ -48,6 +48,42 @@ class BEP20Token {
       contractAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
       decimals: 18,
     ),
+    BEP20Token(
+      name: 'Venus',
+      symbol: 'XVS',
+      contractAddress: '0xcF6BB5389c92Bdda8a3747Ddb454cB7a64626C63',
+      decimals: 18,
+    ),
+    BEP20Token(
+      name: 'Trust Wallet Token',
+      symbol: 'TWT',
+      contractAddress: '0x4B0F1812e5Df2A09796481Ff14017e6005508003',
+      decimals: 18,
+    ),
+    BEP20Token(
+      name: 'Alpaca Finance',
+      symbol: 'ALPACA',
+      contractAddress: '0x8F0528cE5eF7B51152A59745bEfDD91D97091d2F',
+      decimals: 18,
+    ),
+    BEP20Token(
+      name: 'SafeMoon',
+      symbol: 'SFM',
+      contractAddress: '0x42981d0bfbAf196529376EE702F2a9Eb9092fcB5',
+      decimals: 9,
+    ),
+    BEP20Token(
+      name: 'Binance-Peg Ethereum',
+      symbol: 'ETH',
+      contractAddress: '0x2170Ed0880ac9A755fd29B2688956BD959F933F8',
+      decimals: 18,
+    ),
+    BEP20Token(
+      name: 'Binance-Peg Bitcoin',
+      symbol: 'BTCB',
+      contractAddress: '0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c',
+      decimals: 18,
+    ),
   ];
 }
 

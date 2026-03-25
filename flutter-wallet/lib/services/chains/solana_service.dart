@@ -3,6 +3,168 @@ import 'package:http/http.dart' as http;
 import '../../utils/constants.dart';
 import 'chain_service.dart';
 
+/// Popular SPL tokens with their mint addresses (Solana mainnet-beta).
+class SplToken {
+  final String name;
+  final String symbol;
+  final String mintAddress;
+  final int decimals;
+
+  const SplToken({
+    required this.name,
+    required this.symbol,
+    required this.mintAddress,
+    this.decimals = 9,
+  });
+
+  static const List<SplToken> popular = [
+    SplToken(
+      name: 'USD Coin',
+      symbol: 'USDC',
+      mintAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Tether USD',
+      symbol: 'USDT',
+      mintAddress: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Jupiter',
+      symbol: 'JUP',
+      mintAddress: 'JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Raydium',
+      symbol: 'RAY',
+      mintAddress: '4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Bonk',
+      symbol: 'BONK',
+      mintAddress: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',
+      decimals: 5,
+    ),
+    SplToken(
+      name: 'dogwifhat',
+      symbol: 'WIF',
+      mintAddress: 'EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Render',
+      symbol: 'RENDER',
+      mintAddress: 'rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof',
+      decimals: 8,
+    ),
+    SplToken(
+      name: 'Pyth Network',
+      symbol: 'PYTH',
+      mintAddress: 'HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Jito',
+      symbol: 'JTO',
+      mintAddress: 'jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL',
+      decimals: 9,
+    ),
+    SplToken(
+      name: 'Marinade Staked SOL',
+      symbol: 'MSOL',
+      mintAddress: 'mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So',
+      decimals: 9,
+    ),
+    SplToken(
+      name: 'Orca',
+      symbol: 'ORCA',
+      mintAddress: 'orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Wormhole',
+      symbol: 'W',
+      mintAddress: '85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Tensor',
+      symbol: 'TNSR',
+      mintAddress: 'TNSRxcUxoT9xBG3de7PiJyTDYu7kskLqcpddxnEJAS6',
+      decimals: 9,
+    ),
+    SplToken(
+      name: 'Helium',
+      symbol: 'HNT',
+      mintAddress: 'hntyVP6YFm1Hg25TN9WGLqM12b8TQmcknKrdu1oxWux',
+      decimals: 8,
+    ),
+    SplToken(
+      name: 'Helium Mobile',
+      symbol: 'MOBILE',
+      mintAddress: 'mb1eu7TzEc71KxDpsmsKoucSSuuoGLv1drys1oP2jh6',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Solana Bridged USDC',
+      symbol: 'USDCpo',
+      mintAddress: 'A9mUU4qviSctJVPJdBGKbGJrNsB7UfDkAs5dvbSWz9S',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'BlazeStake Staked SOL',
+      symbol: 'BSOL',
+      mintAddress: 'bSo13r4TkiE4KumL71LsHTPpL2euBYLFx6h9HP3piy1',
+      decimals: 9,
+    ),
+    SplToken(
+      name: 'Infinity',
+      symbol: 'INF',
+      mintAddress: '5oVNBeEEQvYi1cX3ir8Dx5n1P7pdxydbGF2X4TxVusJm',
+      decimals: 9,
+    ),
+    SplToken(
+      name: 'Popcat',
+      symbol: 'POPCAT',
+      mintAddress: '7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr',
+      decimals: 9,
+    ),
+    SplToken(
+      name: 'Mango',
+      symbol: 'MNGO',
+      mintAddress: 'MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Serum',
+      symbol: 'SRM',
+      mintAddress: 'SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Bome',
+      symbol: 'BOME',
+      mintAddress: 'ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Fida',
+      symbol: 'FIDA',
+      mintAddress: 'EchesyfXePKdLtoiZSL8pBe8Myagz5Q7L5F8dA3YTVas',
+      decimals: 6,
+    ),
+    SplToken(
+      name: 'Wrapped SOL',
+      symbol: 'WSOL',
+      mintAddress: 'So11111111111111111111111111111111111111112',
+      decimals: 9,
+    ),
+  ];
+}
+
 /// Real Solana chain service (mainnet-beta / devnet).
 ///
 /// Uses BIP44 derivation (m/44'/501'/0'/0') for Solana keypairs.

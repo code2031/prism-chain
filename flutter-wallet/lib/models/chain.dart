@@ -17,6 +17,21 @@ enum ChainType {
   litecoin,
   cardano,
   xrp,
+  cosmos,
+  polkadot,
+  near,
+  sui,
+  aptos,
+  stellar,
+  algorand,
+  hedera,
+  ton,
+  kaspa,
+  filecoin,
+  celestia,
+  sei,
+  bitcoinCash,
+  monero,
 }
 
 /// Represents a blockchain network with its current state.
@@ -213,6 +228,126 @@ class Chain {
       symbol: 'XRP',
       iconEmoji: '\u{1F4A7}', // droplet
       color: 'FF23292F',
+      isEnabled: false,
+    ),
+    ChainType.cosmos: Chain(
+      type: ChainType.cosmos,
+      name: 'Cosmos',
+      symbol: 'ATOM',
+      iconEmoji: '\u{269B}', // atom symbol
+      color: 'FF2E3148',
+      isEnabled: false,
+    ),
+    ChainType.polkadot: Chain(
+      type: ChainType.polkadot,
+      name: 'Polkadot',
+      symbol: 'DOT',
+      iconEmoji: '\u{1F534}', // red circle
+      color: 'FFE6007A',
+      isEnabled: false,
+    ),
+    ChainType.near: Chain(
+      type: ChainType.near,
+      name: 'NEAR',
+      symbol: 'NEAR',
+      iconEmoji: '\u{1F30D}', // globe
+      color: 'FF00C08B',
+      isEnabled: false,
+    ),
+    ChainType.sui: Chain(
+      type: ChainType.sui,
+      name: 'Sui',
+      symbol: 'SUI',
+      iconEmoji: '\u{1F4A7}', // droplet
+      color: 'FF6FBCF0',
+      isEnabled: false,
+    ),
+    ChainType.aptos: Chain(
+      type: ChainType.aptos,
+      name: 'Aptos',
+      symbol: 'APT',
+      iconEmoji: '\u{1F7E2}', // green circle
+      color: 'FF2DD8A3',
+      isEnabled: false,
+    ),
+    ChainType.stellar: Chain(
+      type: ChainType.stellar,
+      name: 'Stellar',
+      symbol: 'XLM',
+      iconEmoji: '\u{2B50}', // star
+      color: 'FF14B6E7',
+      isEnabled: false,
+    ),
+    ChainType.algorand: Chain(
+      type: ChainType.algorand,
+      name: 'Algorand',
+      symbol: 'ALGO',
+      iconEmoji: '\u{25B3}', // triangle
+      color: 'FF000000',
+      isEnabled: false,
+    ),
+    ChainType.hedera: Chain(
+      type: ChainType.hedera,
+      name: 'Hedera',
+      symbol: 'HBAR',
+      iconEmoji: '\u{2B23}', // hexagon
+      color: 'FF222222',
+      isEnabled: false,
+    ),
+    ChainType.ton: Chain(
+      type: ChainType.ton,
+      name: 'TON',
+      symbol: 'TON',
+      iconEmoji: '\u{1F48E}', // gem
+      color: 'FF0098EA',
+      isEnabled: false,
+    ),
+    ChainType.kaspa: Chain(
+      type: ChainType.kaspa,
+      name: 'Kaspa',
+      symbol: 'KAS',
+      iconEmoji: '\u{1F4A0}', // diamond with dot
+      color: 'FF49EACB',
+      isEnabled: false,
+    ),
+    ChainType.filecoin: Chain(
+      type: ChainType.filecoin,
+      name: 'Filecoin',
+      symbol: 'FIL',
+      iconEmoji: '\u{1F4BE}', // floppy disk
+      color: 'FF0090FF',
+      isEnabled: false,
+    ),
+    ChainType.celestia: Chain(
+      type: ChainType.celestia,
+      name: 'Celestia',
+      symbol: 'TIA',
+      iconEmoji: '\u{1F31F}', // glowing star
+      color: 'FF7B2BF9',
+      isEnabled: false,
+    ),
+    ChainType.sei: Chain(
+      type: ChainType.sei,
+      name: 'Sei',
+      symbol: 'SEI',
+      iconEmoji: '\u{1F30A}', // ocean wave
+      color: 'FF9B1B30',
+      isEnabled: false,
+    ),
+    ChainType.bitcoinCash: Chain(
+      type: ChainType.bitcoinCash,
+      name: 'Bitcoin Cash',
+      symbol: 'BCH',
+      iconEmoji: '\u{1F7E2}', // green circle
+      color: 'FF8DC351',
+      isEnabled: false,
+    ),
+    ChainType.monero: Chain(
+      type: ChainType.monero,
+      name: 'Monero',
+      symbol: 'XMR',
+      iconEmoji: '\u{1F6E1}', // shield
+      color: 'FFFF6600',
       isEnabled: false,
     ),
   };

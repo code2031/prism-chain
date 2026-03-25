@@ -20,7 +20,23 @@ import '../services/chains/dogecoin_service.dart';
 import '../services/chains/litecoin_service.dart';
 import '../services/chains/cardano_service.dart';
 import '../services/chains/xrp_service.dart';
+import '../services/chains/cosmos_service.dart';
+import '../services/chains/polkadot_service.dart';
+import '../services/chains/near_service.dart';
+import '../services/chains/sui_service.dart';
+import '../services/chains/aptos_service.dart';
+import '../services/chains/stellar_service.dart';
+import '../services/chains/algorand_service.dart';
+import '../services/chains/hedera_service.dart';
+import '../services/chains/ton_service.dart';
+import '../services/chains/kaspa_service.dart';
+import '../services/chains/filecoin_service.dart';
+import '../services/chains/celestia_service.dart';
+import '../services/chains/sei_service.dart';
+import '../services/chains/bitcoin_cash_service.dart';
+import '../services/chains/monero_service.dart';
 import '../services/rpc_service.dart';
+import '../services/price_service.dart';
 
 /// Manages multi-chain wallet state across all supported blockchains.
 ///
@@ -28,6 +44,7 @@ import '../services/rpc_service.dart';
 /// Trust Wallet / Exodus-style universal wallet experience.
 class MultiChainProvider extends ChangeNotifier {
   final RpcService _rpcService;
+  final PriceService _priceService = PriceService();
 
   // Chain service instances
   late final PrismService _prismService;
@@ -47,6 +64,21 @@ class MultiChainProvider extends ChangeNotifier {
   late final LitecoinService _litecoinService;
   late final CardanoService _cardanoService;
   late final XrpService _xrpService;
+  late final CosmosService _cosmosService;
+  late final PolkadotService _polkadotService;
+  late final NearService _nearService;
+  late final SuiService _suiService;
+  late final AptosService _aptosService;
+  late final StellarService _stellarService;
+  late final AlgorandService _algorandService;
+  late final HederaService _hederaService;
+  late final TonService _tonService;
+  late final KaspaService _kaspaService;
+  late final FilecoinService _filecoinService;
+  late final CelestiaService _celestiaService;
+  late final SeiService _seiService;
+  late final BitcoinCashService _bitcoinCashService;
+  late final MoneroService _moneroService;
 
   // State
   Map<ChainType, Chain> _chains = {};
@@ -76,6 +108,78 @@ class MultiChainProvider extends ChangeNotifier {
     'USDT': 1.0,
     'USDC': 1.0,
     'DAI': 1.0,
+    'ATOM': 9.50,
+    'DOT': 7.20,
+    'NEAR': 5.80,
+    'SUI': 3.40,
+    'APT': 9.00,
+    'XLM': 0.12,
+    'ALGO': 0.22,
+    'HBAR': 0.08,
+    'TON': 5.50,
+    'KAS': 0.14,
+    'FIL': 5.60,
+    'TIA': 11.00,
+    'SEI': 0.45,
+    'BCH': 240.0,
+    'XMR': 165.0,
+    // ERC-20 tokens
+    'SHIB': 0.000025,
+    'PEPE': 0.000012,
+    'AAVE': 95.0,
+    'LDO': 2.20,
+    'MKR': 1500.0,
+    'CRV': 0.55,
+    'SNX': 3.00,
+    'GRT': 0.25,
+    'FET': 2.30,
+    'RNDR': 8.50,
+    'APE': 1.50,
+    'SAND': 0.45,
+    'MANA': 0.42,
+    'ENS': 18.0,
+    '1INCH': 0.45,
+    'COMP': 55.0,
+    'WBTC': 65000.0,
+    'STETH': 3200.0,
+    'WETH': 3200.0,
+    'UNI': 7.50,
+    'LINK': 15.0,
+    // SPL tokens (Solana)
+    'JUP': 0.85,
+    'RAY': 1.80,
+    'BONK': 0.000025,
+    'WIF': 2.40,
+    'RENDER': 8.50,
+    'PYTH': 0.38,
+    'JTO': 3.20,
+    'MSOL': 155.0,
+    'ORCA': 4.50,
+    'W': 0.60,
+    'TNSR': 0.95,
+    'HNT': 6.50,
+    'MOBILE': 0.001,
+    'BSOL': 150.0,
+    'INF': 155.0,
+    'POPCAT': 0.70,
+    'MNGO': 0.03,
+    'SRM': 0.04,
+    'BOME': 0.01,
+    'FIDA': 0.30,
+    'WSOL': 140.0,
+    // BNB tokens
+    'CAKE': 2.50,
+    'WBNB': 580.0,
+    'XVS': 8.0,
+    'TWT': 1.20,
+    'ALPACA': 0.20,
+    'SFM': 0.0003,
+    'BTCB': 65000.0,
+    // Polygon tokens
+    'QUICK': 0.05,
+    'SUSHI': 1.10,
+    'BAL': 3.50,
+    'BUSD': 1.0,
   };
 
   MultiChainProvider(this._rpcService) {
@@ -133,6 +237,21 @@ class MultiChainProvider extends ChangeNotifier {
     _litecoinService = LitecoinService();
     _cardanoService = CardanoService();
     _xrpService = XrpService();
+    _cosmosService = CosmosService();
+    _polkadotService = PolkadotService();
+    _nearService = NearService();
+    _suiService = SuiService();
+    _aptosService = AptosService();
+    _stellarService = StellarService();
+    _algorandService = AlgorandService();
+    _hederaService = HederaService();
+    _tonService = TonService();
+    _kaspaService = KaspaService();
+    _filecoinService = FilecoinService();
+    _celestiaService = CelestiaService();
+    _seiService = SeiService();
+    _bitcoinCashService = BitcoinCashService();
+    _moneroService = MoneroService();
 
     _services = {
       ChainType.prism: _prismService,
@@ -152,6 +271,21 @@ class MultiChainProvider extends ChangeNotifier {
       ChainType.litecoin: _litecoinService,
       ChainType.cardano: _cardanoService,
       ChainType.xrp: _xrpService,
+      ChainType.cosmos: _cosmosService,
+      ChainType.polkadot: _polkadotService,
+      ChainType.near: _nearService,
+      ChainType.sui: _suiService,
+      ChainType.aptos: _aptosService,
+      ChainType.stellar: _stellarService,
+      ChainType.algorand: _algorandService,
+      ChainType.hedera: _hederaService,
+      ChainType.ton: _tonService,
+      ChainType.kaspa: _kaspaService,
+      ChainType.filecoin: _filecoinService,
+      ChainType.celestia: _celestiaService,
+      ChainType.sei: _seiService,
+      ChainType.bitcoinCash: _bitcoinCashService,
+      ChainType.monero: _moneroService,
     };
   }
 
@@ -212,7 +346,10 @@ class MultiChainProvider extends ChangeNotifier {
     _error = null;
     notifyListeners();
 
-    final futures = <Future>[];
+    // Fetch live prices in parallel with chain balances
+    final futures = <Future>[
+      _priceService.fetchAllPrices(),
+    ];
     for (final type in ChainType.values) {
       if (_chains[type]?.isEnabled ?? false) {
         futures.add(_refreshChainBalance(type));
@@ -501,6 +638,9 @@ class MultiChainProvider extends ChangeNotifier {
   }
 
   double _getPriceForSymbol(String symbol) {
+    // Try live price first, fall back to static defaults
+    final livePrice = _priceService.getPrice(symbol);
+    if (livePrice > 0) return livePrice;
     return _prices[symbol.toUpperCase()] ?? 0.0;
   }
 

@@ -77,6 +77,57 @@ class AppConstants {
   static const String xrpRpcUrl = 'https://s1.ripple.com:51234';
   static const String xrpTestnetRpcUrl = 'https://s.altnet.rippletest.net:51234';
 
+  // Cosmos Hub - Cosmos REST / Tendermint RPC
+  static const String cosmosRestUrl = 'https://rest.cosmos.directory/cosmoshub';
+  static const String cosmosRpcUrl = 'https://rpc.cosmos.directory/cosmoshub';
+
+  // Polkadot - Subscan REST API
+  static const String polkadotApiUrl = 'https://polkadot.api.subscan.io';
+  static const String polkadotRpcUrl = 'wss://rpc.polkadot.io';
+
+  // NEAR Protocol - NEAR JSON-RPC
+  static const String nearRpcUrl = 'https://rpc.mainnet.near.org';
+  static const String nearTestnetRpcUrl = 'https://rpc.testnet.near.org';
+
+  // Sui - Sui JSON-RPC
+  static const String suiRpcUrl = 'https://fullnode.mainnet.sui.io';
+  static const String suiTestnetRpcUrl = 'https://fullnode.testnet.sui.io';
+
+  // Aptos - Aptos REST API
+  static const String aptosApiUrl = 'https://fullnode.mainnet.aptoslabs.com/v1';
+  static const String aptosTestnetApiUrl = 'https://fullnode.testnet.aptoslabs.com/v1';
+
+  // Stellar - Horizon REST API
+  static const String stellarApiUrl = 'https://horizon.stellar.org';
+  static const String stellarTestnetApiUrl = 'https://horizon-testnet.stellar.org';
+
+  // Algorand - Algod REST API
+  static const String algorandApiUrl = 'https://mainnet-api.algonode.cloud';
+  static const String algorandTestnetApiUrl = 'https://testnet-api.algonode.cloud';
+
+  // Hedera - Mirror Node REST API
+  static const String hederaApiUrl = 'https://mainnet-public.mirrornode.hedera.com';
+  static const String hederaTestnetApiUrl = 'https://testnet.mirrornode.hedera.com';
+
+  // TON - toncenter REST API
+  static const String tonApiUrl = 'https://toncenter.com/api/v2';
+  static const String tonTestnetApiUrl = 'https://testnet.toncenter.com/api/v2';
+
+  // Kaspa - Kaspa REST API
+  static const String kaspaApiUrl = 'https://api.kaspa.org';
+
+  // Filecoin - Filecoin JSON-RPC (Glif)
+  static const String filecoinRpcUrl = 'https://api.node.glif.io/rpc/v1';
+  static const String filecoinTestnetRpcUrl = 'https://api.calibration.node.glif.io/rpc/v1';
+
+  // Celestia - Celestia REST API (Cosmos SDK)
+  static const String celestiaRestUrl = 'https://rest.cosmos.directory/celestia';
+  static const String celestiaRpcUrl = 'https://rpc.cosmos.directory/celestia';
+
+  // Sei - Sei REST API (Cosmos SDK)
+  static const String seiRestUrl = 'https://rest.sei-apis.com';
+  static const String seiRpcUrl = 'https://rpc.sei-apis.com';
+
   // ── Block Explorers ──
   static const String bitcoinExplorer = 'https://blockstream.info';
   static const String ethereumExplorer = 'https://etherscan.io';
@@ -94,6 +145,19 @@ class AppConstants {
   static const String litecoinExplorer = 'https://litecoinspace.org';
   static const String cardanoExplorer = 'https://cardanoscan.io';
   static const String xrpExplorer = 'https://xrpscan.com';
+  static const String cosmosExplorer = 'https://www.mintscan.io/cosmos';
+  static const String polkadotExplorer = 'https://polkadot.subscan.io';
+  static const String nearExplorer = 'https://nearblocks.io';
+  static const String suiExplorer = 'https://suiscan.xyz';
+  static const String aptosExplorer = 'https://explorer.aptoslabs.com';
+  static const String stellarExplorer = 'https://stellarchain.io';
+  static const String algorandExplorer = 'https://allo.info';
+  static const String hederaExplorer = 'https://hashscan.io/mainnet';
+  static const String tonExplorer = 'https://tonscan.org';
+  static const String kaspaExplorer = 'https://explorer.kaspa.org';
+  static const String filecoinExplorer = 'https://filfox.info/en';
+  static const String celestiaExplorer = 'https://www.mintscan.io/celestia';
+  static const String seiExplorer = 'https://www.seiscan.app';
 
   // ── Program IDs (Prism / Solana) ──
   static const String systemProgramId = '11111111111111111111111111111111';
