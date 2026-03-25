@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SolClone Faucet
 
-## Getting Started
+> Request devnet and testnet SCLONE tokens through a simple web interface.
 
-First, run the development server:
+Part of the [SolClone](https://github.com/code2031/solana-clone) ecosystem.
+
+---
+
+## Overview
+
+The SolClone Faucet is a Next.js web application that allows developers to request
+free SCLONE tokens on devnet and testnet networks. It provides a clean, branded UI
+with built-in rate limiting to prevent abuse while keeping tokens accessible for
+development and testing.
+
+## Features
+
+- **Network Selection** -- Toggle between devnet and testnet token requests
+- **Wallet Address Input** -- Paste any valid SolClone address to receive tokens
+- **Rate Limiting** -- 10 requests per hour per IP address, 5 requests per hour per wallet address
+- **Transaction Tracking** -- View airdrop transaction signature and confirmation status
+- **Responsive Design** -- Mobile-friendly UI with SolClone branding
+
+## Quick Start
 
 ```bash
+cd faucet
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The faucet UI will be available at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Default | Description |
+|---|---|---|
+| `FAUCET_RPC_URL` | `http://localhost:8899` | RPC endpoint for the target network |
+| `FAUCET_AMOUNT` | `2` | Number of SCLONE tokens per request |
+| `FAUCET_KEYPAIR` | `~/.config/solclone/faucet.json` | Funder keypair path |
+| `RATE_LIMIT_IP` | `10` | Max requests per hour per IP |
+| `RATE_LIMIT_ADDR` | `5` | Max requests per hour per address |
 
-## Learn More
+## API Endpoint
 
-To learn more about Next.js, take a look at the following resources:
+```
+POST /api/airdrop
+Content-Type: application/json
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+{
+  "address": "<SCLONE_WALLET_ADDRESS>",
+  "network": "devnet" | "testnet"
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Returns a JSON response with the transaction signature and amount.
 
-## Deploy on Vercel
+## Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS
+- **Rate Limiting**: In-memory store with IP and address tracking
+- **RPC Client**: SolClone web3.js SDK
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+Apache 2.0 -- see the root [LICENSE](../LICENSE) file.

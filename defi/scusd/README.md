@@ -1,36 +1,75 @@
-# SCUSD Stablecoin
+# SCUSD -- SolClone Stablecoin
 
-SCUSD is an overcollateralized stablecoin pegged to $1 USD, backed by SCLONE token collateral on the SolClone network.
+> Over-collateralized stablecoin pegged to $1 USD, backed by SCLONE deposits.
 
-## How It Works
+Part of the [SolClone DeFi Suite](../README.md) | [SolClone](https://github.com/code2031/solana-clone)
 
-Users deposit SCLONE tokens into personal vaults and mint SCUSD against them. The system enforces a minimum **150% collateral ratio** to keep SCUSD fully backed.
+---
 
-### Key Parameters
+## Overview
 
-| Parameter | Value | Description |
-|-----------|-------|-------------|
-| Minimum Collateral Ratio | 150% | Required ratio to mint or withdraw |
-| Liquidation Ratio | 120% | Vaults below this can be liquidated |
-| Stability Fee | 2% annual | Accrues on outstanding SCUSD debt |
-| Liquidation Discount | 5% | Bonus collateral for liquidators |
+SCUSD is a decentralized, over-collateralized stablecoin on the SolClone blockchain.
+Users mint SCUSD by depositing SCLONE tokens as collateral at a minimum 150%
+collateralization ratio. The peg to $1 USD is maintained through a combination of
+collateral requirements, liquidation mechanics, and arbitrage incentives.
 
-### Instructions
+## Features
 
-- **initialize** -- Set up the SCUSD mint and global state.
-- **open_vault** -- Create a personal collateral vault.
-- **deposit_collateral** -- Add SCLONE collateral to your vault.
-- **mint_scusd** -- Mint SCUSD against your collateral (must stay above 150%).
-- **repay_scusd** -- Burn SCUSD to reduce your debt.
-- **withdraw_collateral** -- Withdraw excess collateral (must stay above 150%).
-- **liquidate_vault** -- Liquidate undercollateralized vaults (below 120%) and receive collateral at a 5% discount.
+- **Mint SCUSD** -- Deposit SCLONE tokens to mint SCUSD at 150% minimum collateralization
+- **Burn and Redeem** -- Burn SCUSD to unlock deposited SCLONE collateral
+- **Dynamic Collateral Ratio** -- Oracle-fed SCLONE price determines real-time ratio
+- **Liquidation** -- Vaults below 150% collateralization can be liquidated
+- **Stability Fee** -- Annual fee accrued on minted SCUSD, paid on redemption
+- **Global Debt Ceiling** -- Protocol-level cap on total SCUSD supply
 
-### Price Feed
+## Peg Mechanism
 
-SCUSD relies on the SolClone Price Oracle for SCLONE/USD prices. The oracle price is read as a `u64` with 8 decimal places of precision.
+| Scenario | Market Response |
+|---|---|
+| SCUSD > $1 | Users mint new SCUSD and sell, pushing price down |
+| SCUSD < $1 | Users buy cheap SCUSD and burn to redeem collateral at $1 value |
 
-### Build
+## Key Parameters
+
+| Parameter | Value |
+|---|---|
+| Minimum Collateral Ratio | 150% |
+| Liquidation Threshold | 150% |
+| Liquidation Penalty | 10% |
+| Stability Fee | 2% APY |
+| Debt Ceiling | 10,000,000 SCUSD |
+
+## Quick Start
+
+Build the on-chain program:
 
 ```bash
 cargo build-bpf
 ```
+
+Deploy to devnet:
+
+```bash
+solclone program deploy target/deploy/scusd.so --url devnet
+```
+
+## Program Instructions
+
+| Instruction | Description |
+|---|---|
+| `create_vault` | Open a new collateral vault |
+| `deposit_collateral` | Add SCLONE collateral to a vault |
+| `mint_scusd` | Mint SCUSD against vault collateral |
+| `burn_scusd` | Burn SCUSD to reduce vault debt |
+| `withdraw_collateral` | Remove excess collateral from a vault |
+| `liquidate_vault` | Liquidate an under-collateralized vault |
+
+## Tech Stack
+
+- **On-Chain**: Rust, SolClone BPF program framework
+- **Price Data**: SolClone Price Oracle for SCLONE/USD price
+- **Math**: u128 fixed-point with 6-decimal precision
+
+## License
+
+Apache 2.0 -- see the root [LICENSE](../../LICENSE) file.

@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SolClone Health Dashboard
 
-## Getting Started
+> Real-time network monitoring and statistics for the SolClone blockchain.
 
-First, run the development server:
+Part of the [SolClone](https://github.com/code2031/solana-clone) ecosystem.
+
+---
+
+## Overview
+
+The SolClone Health Dashboard is a Next.js application that provides live visibility
+into network health. It displays current slot height, transactions per second, active
+validator count, epoch progress, and historical performance charts. Data is polled
+from the RPC endpoint every 2 seconds using SWR for efficient cache-based revalidation.
+
+## Features
+
+- **Slot Height** -- Live current slot with blocks-per-second rate
+- **TPS Gauge** -- Real-time transactions per second with peak tracking
+- **Validator Table** -- Active, delinquent, and total validator counts with stake distribution
+- **Epoch Progress** -- Current epoch number, slot index, and estimated time remaining
+- **Performance Charts** -- Historical TPS, slot time, and skip rate graphs via Recharts
+- **Network Selector** -- Switch between mainnet, devnet, and testnet views
+- **Auto-Refresh** -- Polls RPC every 2 seconds with SWR stale-while-revalidate
+
+## Quick Start
 
 ```bash
+cd health-dashboard
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The dashboard will be available at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Default | Description |
+|---|---|---|
+| `RPC_URL` | `http://localhost:8899` | SolClone RPC endpoint |
+| `POLL_INTERVAL` | `2000` | Polling interval in milliseconds |
+| `HISTORY_WINDOW` | `300` | Number of data points to retain for charts |
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: Next.js 14 (App Router)
+- **Charts**: Recharts for time-series and gauge visualizations
+- **Data Fetching**: SWR with 2-second refresh interval
+- **Styling**: Tailwind CSS with SolClone design tokens
+- **RPC Client**: SolClone web3.js SDK
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## RPC Methods Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `getSlot` -- Current slot height
+- `getRecentPerformanceSamples` -- TPS and slot timing
+- `getVoteAccounts` -- Validator status and stake
+- `getEpochInfo` -- Epoch number, slot index, slots in epoch
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Apache 2.0 -- see the root [LICENSE](../LICENSE) file.
