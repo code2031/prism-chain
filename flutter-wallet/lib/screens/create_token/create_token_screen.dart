@@ -66,14 +66,7 @@ class _CreateTokenScreenState extends State<CreateTokenScreen>
 
     try {
       final walletProvider = context.read<WalletProvider>();
-      final rpcService = RpcService(rpcUrl: walletProvider.wallet != null ? null : null);
-      final walletService = WalletService();
 
-      // We need direct access to the services. In production you'd inject these.
-      // For now, we access them through a fresh TokenService that reuses
-      // the existing wallet's keypair.
-      // The wallet provider already has a loaded wallet, so we reconstruct
-      // the services from the provider's context.
       final tokenService = TokenService(
         rpcService: Provider.of<RpcService>(context, listen: false),
         walletService: Provider.of<WalletService>(context, listen: false),

@@ -1,0 +1,30 @@
+{
+  "name": "@solclone/wallet-standard",
+  "version": "1.0.0",
+  "description": "Solana Wallet Standard implementation for SolClone — enables third-party wallet interoperability",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@solana/wallet-standard-features": "^1.2.0",
+    "@wallet-standard/base": "^1.0.0",
+    "@wallet-standard/features": "^1.0.0",
+    "tweetnacl": "^1.0.3",
+    "bs58": "^5.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  },
+  "keywords": [
+    "solclone",
+    "solana",
+    "wallet",
+    "wallet-standard",
+    "crypto"
+  ],
+  "license": "MIT"
+}

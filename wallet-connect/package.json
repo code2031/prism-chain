@@ -1,0 +1,29 @@
+{
+  "name": "@solclone/wallet-connect",
+  "version": "1.0.0",
+  "description": "WalletConnect v2 protocol support for SolClone — mobile wallet QR code connections",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@walletconnect/sign-client": "^2.11.0",
+    "@walletconnect/types": "^2.11.0",
+    "tweetnacl": "^1.0.3",
+    "bs58": "^5.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  },
+  "keywords": [
+    "solclone",
+    "solana",
+    "walletconnect",
+    "wallet",
+    "qr-code"
+  ],
+  "license": "MIT"
+}

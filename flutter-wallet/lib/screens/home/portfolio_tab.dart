@@ -238,11 +238,30 @@ class PortfolioTab extends StatelessWidget {
                     ),
                   ),
 
-                // Bottom padding
-                const SliverToBoxAdapter(child: SizedBox(height: 20)),
+                // Bottom padding for FAB clearance
+                const SliverToBoxAdapter(child: SizedBox(height: 80)),
               ],
             ),
           ),
+        ),
+          // Floating action button — Create Token / NFT
+          Positioned(
+            right: 20,
+            bottom: 20,
+            child: FloatingActionButton(
+              heroTag: 'create_token_fab',
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const ManageTokensScreen(),
+                  ),
+                );
+              },
+              backgroundColor: AppTheme.solanaPurple,
+              child: const Icon(Icons.add_rounded, color: Colors.white, size: 28),
+            ),
+          ),
+          ],
         );
       },
     );
