@@ -1,0 +1,15 @@
+[package]
+name = "solclone-governance"
+version = "0.1.0"
+edition = "2021"
+description = "SolClone DAO Governance - Token-weighted voting with proposal lifecycle and timelocks"
+
+[dependencies]
+solana-program = "1.17"
+borsh = "0.10"
+borsh-derive = "0.10"
+spl-token = { version = "4.0", features = ["no-entrypoint"] }
+thiserror = "1.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]

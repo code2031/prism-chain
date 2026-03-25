@@ -1,0 +1,15 @@
+[package]
+name = "scusd-stablecoin"
+version = "0.1.0"
+edition = "2021"
+description = "SCUSD Stablecoin - Overcollateralized stablecoin backed by SCLONE"
+
+[dependencies]
+solana-program = "1.17"
+borsh = "0.10"
+borsh-derive = "0.10"
+spl-token = { version = "4.0", features = ["no-entrypoint"] }
+thiserror = "1.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]

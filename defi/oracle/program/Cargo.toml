@@ -1,0 +1,14 @@
+[package]
+name = "solclone-oracle"
+version = "0.1.0"
+edition = "2021"
+description = "SolClone Price Oracle - Decentralized price feeds with multi-publisher aggregation"
+
+[dependencies]
+solana-program = "1.17"
+borsh = "0.10"
+borsh-derive = "0.10"
+thiserror = "1.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
