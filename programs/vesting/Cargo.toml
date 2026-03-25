@@ -1,0 +1,13 @@
+[package]
+name = "prism-vesting"
+version = "0.1.0"
+edition = "2021"
+description = "Prism token vesting with cliff periods, linear/quarterly schedules, and revocable grants"
+
+[dependencies]
+solana-program = "2.0"
+borsh = "0.10"
+thiserror = "1.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]

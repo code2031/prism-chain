@@ -1,0 +1,42 @@
+{
+  "token": {
+    "name": "Prism",
+    "symbol": "PRISM",
+    "decimals": 9,
+    "maxSupply": 1000000000,
+    "initialSupply": 500000000,
+    "genesisDistribution": {
+      "publicSale": 0.30,
+      "ecosystem": 0.25,
+      "team": 0.15,
+      "treasury": 0.15,
+      "validators": 0.10,
+      "airdrop": 0.05
+    }
+  },
+  "inflation": {
+    "initialRate": 0.08,
+    "annualDecreaseRate": 0.15,
+    "floorRate": 0.015,
+    "halvingIntervalYears": 4,
+    "halvingReduction": 0.50
+  },
+  "fees": {
+    "baseFee": 5000,
+    "burnRate": 0.50,
+    "validatorShare": 0.30,
+    "treasuryShare": 0.10,
+    "stakerShare": 0.10,
+    "priorityLanes": {
+      "economy": { "multiplier": 1.0, "maxWait": "60s" },
+      "standard": { "multiplier": 2.0, "maxWait": "10s" },
+      "fast": { "multiplier": 5.0, "maxWait": "2s" },
+      "instant": { "multiplier": 10.0, "maxWait": "0.4s" }
+    }
+  },
+  "vesting": {
+    "team": { "cliff": "12 months", "duration": "48 months", "schedule": "linear" },
+    "investors": { "cliff": "6 months", "duration": "24 months", "schedule": "linear" },
+    "ecosystem": { "cliff": "0 months", "duration": "60 months", "schedule": "quarterly" }
+  }
+}

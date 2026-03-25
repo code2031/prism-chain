@@ -1,0 +1,14 @@
+[package]
+name = "prism-flash-loan"
+version = "0.1.0"
+edition = "2021"
+description = "Protocol-level flash loan program with pool management and fee distribution"
+license = "Apache-2.0"
+
+[dependencies]
+solana-program = "2.0"
+borsh = "0.10"
+thiserror = "1.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]

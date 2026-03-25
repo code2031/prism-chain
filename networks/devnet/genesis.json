@@ -6,7 +6,15 @@
     "symbol": "PRISM",
     "decimals": 9,
     "initial_supply": 500000000,
-    "max_supply": null
+    "max_supply": 1000000000
+  },
+  "genesis_distribution": {
+    "public_sale": 0.30,
+    "ecosystem": 0.25,
+    "team": 0.15,
+    "treasury": 0.15,
+    "validators": 0.10,
+    "airdrop": 0.05
   },
   "slots_per_epoch": 432000,
   "target_tick_duration_ms": 6,
@@ -17,7 +25,16 @@
   "fee_config": {
     "lamports_per_signature": 5000,
     "target_lamports_per_signature": 10000,
-    "fee_burn_percentage": 50
+    "fee_burn_percentage": 50,
+    "validator_share_percentage": 30,
+    "treasury_share_percentage": 10,
+    "staker_share_percentage": 10,
+    "priority_lanes": {
+      "economy": { "multiplier": 1.0, "max_wait_seconds": 60 },
+      "standard": { "multiplier": 2.0, "max_wait_seconds": 10 },
+      "fast": { "multiplier": 5.0, "max_wait_seconds": 2 },
+      "instant": { "multiplier": 10.0, "max_wait_seconds": 0.4 }
+    }
   },
   "rent_config": {
     "lamports_per_byte_year": 3480,
@@ -28,12 +45,46 @@
     "initial_rate": 0.08,
     "terminal_rate": 0.015,
     "taper_rate": 0.15,
+    "halving_interval_years": 4,
+    "halving_reduction": 0.50,
     "foundation_percentage": 0.05,
     "foundation_term_years": 7
   },
   "staking": {
     "warmup_cooldown_rate": 0.25,
-    "min_delegation_lamports": 1000000000
+    "min_delegation_lamports": 1000000000,
+    "insurance_cut_bps": 200,
+    "tiers": {
+      "flexible": {
+        "lock_days": 0,
+        "reward_multiplier": 1.0
+      },
+      "locked_30": {
+        "lock_days": 30,
+        "reward_multiplier": 1.5
+      },
+      "locked_90": {
+        "lock_days": 90,
+        "reward_multiplier": 2.0
+      },
+      "locked_180": {
+        "lock_days": 180,
+        "reward_multiplier": 3.0
+      },
+      "locked_365": {
+        "lock_days": 365,
+        "reward_multiplier": 5.0
+      }
+    },
+    "liquid_staking": {
+      "enabled": true,
+      "receipt_token_symbol": "stPRISM"
+    }
+  },
+  "vesting": {
+    "team": { "cliff_months": 12, "duration_months": 48, "schedule": "linear" },
+    "investors": { "cliff_months": 6, "duration_months": 24, "schedule": "linear" },
+    "ecosystem": { "cliff_months": 0, "duration_months": 60, "schedule": "quarterly" }
   },
   "validator_config": {
     "min_stake_for_leader": 1000000000000,
@@ -71,6 +122,9 @@
     { "name": "bpf_loader", "id": "BPFLoaderUpgradeab1e11111111111111111111111" },
     { "name": "spl_token", "id": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA" },
     { "name": "associated_token", "id": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL" },
-    { "name": "spl_memo", "id": "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr" }
+    { "name": "spl_memo", "id": "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr" },
+    { "name": "prism_staking", "id": "PrismStake1111111111111111111111111111111111" },
+    { "name": "prism_fee_burn", "id": "PrismBurn1111111111111111111111111111111111" },
+    { "name": "prism_vesting", "id": "PrismVest1111111111111111111111111111111111" }
   ]
 }

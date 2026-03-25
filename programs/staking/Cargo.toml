@@ -1,0 +1,13 @@
+[package]
+name = "prism-staking"
+version = "0.1.0"
+edition = "2021"
+description = "Prism staking program with flexible/locked tiers, liquid staking, and slashing protection"
+
+[dependencies]
+solana-program = "2.0"
+borsh = "0.10"
+thiserror = "1.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
