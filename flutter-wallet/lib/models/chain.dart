@@ -1,5 +1,23 @@
 /// Supported blockchain types.
-enum ChainType { prism, solana, bitcoin, ethereum, polygon, bnb }
+enum ChainType {
+  prism,
+  solana,
+  bitcoin,
+  ethereum,
+  polygon,
+  bnb,
+  avalanche,
+  arbitrum,
+  optimism,
+  base,
+  fantom,
+  cronos,
+  tron,
+  dogecoin,
+  litecoin,
+  cardano,
+  xrp,
+}
 
 /// Represents a blockchain network with its current state.
 class Chain {
@@ -108,6 +126,94 @@ class Chain {
       symbol: 'BNB',
       iconEmoji: '\u{1F7E1}', // yellow circle
       color: 'FFF3BA2F',
+    ),
+    ChainType.avalanche: Chain(
+      type: ChainType.avalanche,
+      name: 'Avalanche',
+      symbol: 'AVAX',
+      iconEmoji: '\u{1F53A}', // red triangle
+      color: 'FFE84142',
+      isEnabled: false,
+    ),
+    ChainType.arbitrum: Chain(
+      type: ChainType.arbitrum,
+      name: 'Arbitrum',
+      symbol: 'ETH',
+      iconEmoji: '\u{1F537}', // blue diamond
+      color: 'FF28A0F0',
+      isEnabled: false,
+    ),
+    ChainType.optimism: Chain(
+      type: ChainType.optimism,
+      name: 'Optimism',
+      symbol: 'ETH',
+      iconEmoji: '\u{1F534}', // red circle
+      color: 'FFFF0420',
+      isEnabled: false,
+    ),
+    ChainType.base: Chain(
+      type: ChainType.base,
+      name: 'Base',
+      symbol: 'ETH',
+      iconEmoji: '\u{1F535}', // blue circle
+      color: 'FF0052FF',
+      isEnabled: false,
+    ),
+    ChainType.fantom: Chain(
+      type: ChainType.fantom,
+      name: 'Fantom',
+      symbol: 'FTM',
+      iconEmoji: '\u{1F47B}', // ghost
+      color: 'FF1969FF',
+      isEnabled: false,
+    ),
+    ChainType.cronos: Chain(
+      type: ChainType.cronos,
+      name: 'Cronos',
+      symbol: 'CRO',
+      iconEmoji: '\u{1F48E}', // gem stone
+      color: 'FF002D74',
+      isEnabled: false,
+    ),
+    ChainType.tron: Chain(
+      type: ChainType.tron,
+      name: 'TRON',
+      symbol: 'TRX',
+      iconEmoji: '\u{26A1}', // lightning bolt
+      color: 'FFEB0029',
+      isEnabled: false,
+    ),
+    ChainType.dogecoin: Chain(
+      type: ChainType.dogecoin,
+      name: 'Dogecoin',
+      symbol: 'DOGE',
+      iconEmoji: '\u{1F415}', // dog
+      color: 'FFC3A634',
+      isEnabled: false,
+    ),
+    ChainType.litecoin: Chain(
+      type: ChainType.litecoin,
+      name: 'Litecoin',
+      symbol: 'LTC',
+      iconEmoji: '\u{1FA99}', // coin
+      color: 'FFA6A9AA',
+      isEnabled: false,
+    ),
+    ChainType.cardano: Chain(
+      type: ChainType.cardano,
+      name: 'Cardano',
+      symbol: 'ADA',
+      iconEmoji: '\u{1F0CF}', // joker card
+      color: 'FF0033AD',
+      isEnabled: false,
+    ),
+    ChainType.xrp: Chain(
+      type: ChainType.xrp,
+      name: 'XRP Ledger',
+      symbol: 'XRP',
+      iconEmoji: '\u{1F4A7}', // droplet
+      color: 'FF23292F',
+      isEnabled: false,
     ),
   };
 }

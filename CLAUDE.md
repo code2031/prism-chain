@@ -285,7 +285,7 @@ All clients communicate with the validator via **Solana-compatible JSON-RPC** (d
 
 - **`cli-wallet/`** — Standalone TypeScript CLI. Uses `commander`, `tweetnacl`, `bs58`. Builds its own raw JSON-RPC client in `src/lib/rpc-client.ts` — does **not** depend on `@solana/web3.js`. Commands in `src/commands/`, shared logic in `src/lib/`.
 
-- **`flutter-wallet/`** — Cross-platform Dart app. State in `lib/providers/` (ChangeNotifier + Provider), network calls in `lib/services/rpc_service.dart`, screens in `lib/screens/`, reusable widgets in `lib/widgets/`. BIP39 mnemonics, Ed25519 HD derivation (m/44'/501'/0'/0').
+- **`flutter-wallet/`** — Cross-platform Dart app. State in `lib/providers/` (ChangeNotifier + Provider), network calls in `lib/services/rpc_service.dart`, screens in `lib/screens/`, reusable widgets in `lib/widgets/`. BIP39 mnemonics, Ed25519 HD derivation (m/44'/501'/0'/0'). Supports 17 chains via `lib/services/chains/`.
 
 - **`explorer/`** — Next.js app, pnpm, shadcn/ui. Forked from `solana-foundation/explorer`.
 
