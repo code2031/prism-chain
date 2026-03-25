@@ -70,7 +70,24 @@ A high-performance Layer 1 blockchain forked from [Solana](https://github.com/an
 | `benchmarks/` | TPS and latency benchmark suite | TypeScript |
 | `docs-site/` | Docusaurus documentation site | TypeScript |
 | `privacy/` | Confidential transfers with shielded pools and ZK proofs | Rust |
+| `programs/` | 13 native on-chain programs (see Coin Features below) | Rust |
+| `tokenomics/` | Token supply, inflation, fee structure, vesting configuration | JSON |
 | `examples/` | Example scripts: create token, create NFT, deploy program, run DApp | Bash |
+
+## Coin Features (45)
+
+Prism has **45 native features** implemented across 13 on-chain programs. See [FEATURES.md](./FEATURES.md) for the complete specification.
+
+| Category | Features | Programs |
+|----------|----------|----------|
+| **Tokenomics** | 1B max supply, 50% fee burn, inflation with halving, treasury, vesting | `fee-burn`, `vesting` |
+| **Staking** | Flexible + locked tiers (1x-5x), liquid staking (stPRISM), auto-compound, slashing insurance | `staking` |
+| **Transactions** | Batch (64 recipients), scheduled, conditional, recurring transfers, priority lanes | `batch-tx` |
+| **Governance** | On-chain proposals, token-weighted voting, delegation, time-lock, emergency fast-track, veto | `governance` |
+| **Privacy** | Confidential transfers, shielded pool, stealth addresses, encrypted notes, compliance mode | `privacy` |
+| **Accounts** | M-of-N multisig, social recovery (guardians), .prism name service, account freeze | `multisig`, `name-service`, `social-recovery` |
+| **DeFi Native** | Atomic swaps (HTLC), flash loans (0.09%), oracle feeds, PUSD stablecoin (150% collateral) | `atomic-swap`, `flash-loan`, `oracle`, `pusd-stablecoin` |
+| **Network** | PoH + Tower BFT, Sealevel parallel processing, dynamic block size, state compression | `validator` |
 
 ## Third-Party Wallet Support
 

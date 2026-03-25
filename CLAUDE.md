@@ -227,6 +227,35 @@ cd privacy/program && cargo build-sbf
 cd privacy/program && cargo test
 ```
 
+### Native Prism Programs (`programs/`)
+
+13 on-chain programs implementing 45 coin features:
+
+```bash
+# Build individual programs
+cd programs/staking && cargo build-sbf
+cd programs/fee-burn && cargo build-sbf
+cd programs/vesting && cargo build-sbf
+cd programs/governance && cargo build-sbf
+cd programs/privacy && cargo build-sbf
+cd programs/multisig && cargo build-sbf
+cd programs/name-service && cargo build-sbf
+cd programs/social-recovery && cargo build-sbf
+cd programs/atomic-swap && cargo build-sbf
+cd programs/flash-loan && cargo build-sbf
+cd programs/oracle && cargo build-sbf
+cd programs/batch-tx && cargo build-sbf
+cd programs/pusd-stablecoin && cargo build-sbf
+
+# Build all programs
+for dir in programs/*/; do (cd "$dir" && cargo build-sbf); done
+
+# Test all programs
+for dir in programs/*/; do (cd "$dir" && cargo test); done
+```
+
+See [FEATURES.md](./FEATURES.md) for the complete 45-feature specification.
+
 ## Testing
 
 ```bash
@@ -290,6 +319,10 @@ All clients communicate with the validator via **Solana-compatible JSON-RPC** (d
 - **`explorer/`** — Next.js app, pnpm, shadcn/ui. Forked from `solana-foundation/explorer`.
 
 - **`program-library/`** — Rust workspace with SPL programs (token, governance, stake-pool, memo, etc.). Forked from `solana-labs/solana-program-library`.
+
+- **`programs/`** — 13 native Prism on-chain programs (Rust, `solana-program` 2.0). Each has `Cargo.toml` + `src/lib.rs`. Build: `cd programs/<name> && cargo build-sbf`. Programs: `staking` (locked tiers, liquid staking, auto-compound), `fee-burn` (50% burn + distribution), `vesting` (cliff/linear/quarterly schedules), `governance` (proposals, voting, delegation, veto), `privacy` (confidential transfers, shielded pool, stealth addresses), `multisig` (M-of-N), `name-service` (.prism names, subdomains), `social-recovery` (guardian-based), `atomic-swap` (HTLC), `flash-loan` (0.09% fee), `oracle` (multi-source median), `batch-tx` (batch/scheduled/conditional/recurring), `pusd-stablecoin` (150% collateral, liquidation).
+
+- **`tokenomics/`** — Canonical tokenomics configuration (`config.json`): 1B max supply, 500M initial, inflation schedule with halving, genesis distribution (6 buckets), fee structure (4 priority lanes), vesting schedules.
 
 - **`web3js-sdk/`** — TypeScript SDK using rollup. Forked from `solana-labs/solana-web3.js`.
 
